@@ -7,24 +7,27 @@ void setup()
 {
 
   //Serial.begin(9600);
-  ConnectWiFi();
  
 }
 
 void loop()
 {
-  
+  ConnectWiFi();
+  ESP.deepSleep(2000000, WAKE_RF_DEFAULT);
 }
 
 void ConnectWiFi()
 {
+  //int x = millis();
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, passwd);
 
   while (WiFi.status() != WL_CONNECTED) {
     //Serial.println("TRYING TO CONNECT");
-    delay(100);
+    //delay(100);
   }
 
-  //Serial.println("CONNECTED");
+  //Serial.print("CONNECTED IN ");
+  //Serial.print(millis() - x);
+  //Serial.println(" MILLISECONDS");
 } 
