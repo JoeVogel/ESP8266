@@ -5,9 +5,7 @@ const char *passwd    = "1234567890";
 
 void setup()
 {
-
   //Serial.begin(9600);
- 
 }
 
 void loop()
