@@ -3,6 +3,8 @@
 const char *ssid      = "ESPap";
 const char *passwd    = "1234567890";
 
+int count;
+
 void setup()
 {
   Serial.begin(115200);//ESP 07
@@ -19,14 +21,28 @@ void ConnectWiFi()
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, passwd);
 
-  for (int i = 0; i < 10; i++)
+  count = 0;
+
+  while (WiFi.status() != WL_CONNECTED) 
   {
-    if (WiFi.status() != WL_CONNECTED) {
-      Serial.print(".");
-      delay(200);
+    Serial.print(".");
+    count++;
+
+    if (count > 20)
+    {
+      break;
     }
 
+    delay(200);
   }
-  
-  Serial.println("CONNECTED");
+
+  if (WiFi.status() == WL_CONNECTED)
+  {
+    Serial.println("CONNECTED");
+  }
+  else
+  {
+    Serial.println("NOT CONNECTED"); 
+  }
+
 } 
