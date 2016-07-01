@@ -5,7 +5,7 @@ const char *passwd    = "1234567890";
 
 void setup()
 {
-  //Serial.begin(115200);//ESP 07
+  Serial.begin(115200);//ESP 07
 }
 
 void loop()
@@ -16,16 +16,17 @@ void loop()
 
 void ConnectWiFi()
 {
-  //int x = millis();
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, passwd);
 
-  while (WiFi.status() != WL_CONNECTED) {
-    //Serial.println("TRYING TO CONNECT");
-    //delay(100);
-  }
+  for (int i = 0; i < 10; i++)
+  {
+    if (WiFi.status() != WL_CONNECTED) {
+      Serial.print(".");
+      delay(200);
+    }
 
-  //Serial.print("CONNECTED IN ");
-  //Serial.print(millis() - x);
-  //Serial.println(" MILLISECONDS");
+  }
+  
+  Serial.println("CONNECTED");
 } 
